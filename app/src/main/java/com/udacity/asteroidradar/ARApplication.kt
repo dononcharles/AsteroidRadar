@@ -9,6 +9,7 @@ import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
 import com.jakewharton.threetenabp.AndroidThreeTen
 import com.udacity.asteroidradar.works.AsteroidRefreshWork
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -20,6 +21,9 @@ import java.util.concurrent.TimeUnit
  */
 class ARApplication : Application() {
 
+    private val coroutineExceptionHandler = CoroutineExceptionHandler { _, exception ->
+        println("Handle $exception in CoroutineExceptionHandler")
+    }
     private val applicationScope = CoroutineScope(Dispatchers.Default)
 
     override fun onCreate() {
@@ -29,7 +33,7 @@ class ARApplication : Application() {
     }
 
     private fun delayInit() {
-        applicationScope.launch {
+        applicationScope.launch(coroutineExceptionHandler) {
             setupRecurringWork()
         }
     }

@@ -17,18 +17,14 @@ class AsteroidRepo(private val appDatabase: AppDatabase) {
 
     private val dateFormatter = DateTimeFormatter.ofPattern(API_QUERY_DATE_FORMAT)
 
-    /*  fun getAsteroids() = appDatabase.asteroidDao.getAsteroids()
-
-
-
-      fun getWeekAsteroids() = appDatabase.asteroidDao.getWeekAsteroids()
-
-      fun getSavedAsteroids() = appDatabase.asteroidDao.getSavedAsteroids()*/
-
     /**
      * Refresh the asteroids stored in the offline cache.
      */
     fun getTodayAsteroids(todayDate: String) = appDatabase.asteroidDao.getTodayAsteroids(todayDate)
+
+    fun getWeekAsteroids(startDate: String, endDate: String) = appDatabase.asteroidDao.getWeekAsteroids(startDate, endDate)
+
+    fun getSavedAsteroids() = appDatabase.asteroidDao.getSavedAsteroids()
 
     suspend fun deletePreviousDayAsteroids() {
         appDatabase.asteroidDao.deleteAsteroidsByDate(OffsetDateTime.now().minusDays(1).format(dateFormatter))
@@ -79,24 +75,4 @@ class AsteroidRepo(private val appDatabase: AppDatabase) {
      * Picture of the day from the offline cache.
      */
     val pictureOfDay = appDatabase.pictureOfDayDao.getPictureOfDay()
-
-    /*  suspend fun deleteAsteroids() {
-          appDatabase. asteroidDao.deleteAsteroids()
-      }
-
-      suspend fun deleteTodayAsteroids() {
-          appDatabase.asteroidDao.deleteTodayAsteroids()
-      }
-
-      suspend fun deleteWeekAsteroids() {
-          appDatabase.asteroidDao.deleteWeekAsteroids()
-      }
-
-      suspend fun deleteSavedAsteroids() {
-          appDatabase.asteroidDao.deleteSavedAsteroids()
-      }*/
-
-    /**
-     * return date range between today and next 7 days
-     */
 }

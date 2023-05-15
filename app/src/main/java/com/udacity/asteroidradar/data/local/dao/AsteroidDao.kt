@@ -18,30 +18,15 @@ interface AsteroidDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(asteroids: List<Asteroid>)
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(asteroids: Asteroid)
-
-    @Query("SELECT * FROM asteroid ORDER BY closeApproachDate DESC")
-    fun getAsteroids(): List<Asteroid>
-
     @Query("SELECT * FROM asteroid WHERE closeApproachDate = :today")
     fun getTodayAsteroids(today: String): Flow<List<Asteroid>>
 
-    @Query("SELECT * FROM asteroid WHERE closeApproachDate BETWEEN :today AND :week")
-    fun getWeekAsteroids(today: String, week: String): List<Asteroid>
+    @Query("SELECT * FROM asteroid WHERE closeApproachDate BETWEEN :startDate AND :endDate")
+    fun getWeekAsteroids(startDate: String, endDate: String): Flow<List<Asteroid>>
 
-    @Query("SELECT * FROM asteroid WHERE isPotentiallyHazardous = 1 ORDER BY closeApproachDate DESC")
-    fun getSavedAsteroids(): List<Asteroid>
-
-    @Query("DELETE FROM asteroid")
-    suspend fun deleteAsteroids()
+    @Query("SELECT * FROM asteroid ORDER BY closeApproachDate DESC")
+    fun getSavedAsteroids(): Flow<List<Asteroid>>
 
     @Query("DELETE FROM asteroid WHERE closeApproachDate = :currentDate")
     suspend fun deleteAsteroidsByDate(currentDate: String)
-
-    @Query("DELETE FROM asteroid WHERE closeApproachDate BETWEEN :today AND :week")
-    suspend fun deleteWeekAsteroids(today: String, week: String)
-
-    @Query("DELETE FROM asteroid WHERE isPotentiallyHazardous = 1")
-    suspend fun deleteSavedAsteroids()
 }

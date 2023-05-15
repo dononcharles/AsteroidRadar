@@ -1,4 +1,4 @@
-package com.udacity.asteroidradar.main
+package com.udacity.asteroidradar.ui.main
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -17,7 +17,7 @@ import com.udacity.asteroidradar.R
 import com.udacity.asteroidradar.data.domains.AsteroidApiStatus
 import com.udacity.asteroidradar.data.local.models.Asteroid
 import com.udacity.asteroidradar.databinding.FragmentMainBinding
-import com.udacity.asteroidradar.main.adapter.AsteroidListAdapter
+import com.udacity.asteroidradar.ui.main.adapter.AsteroidListAdapter
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -97,15 +97,18 @@ class MainFragment : Fragment() {
 
                 override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                     return when (menuItem.itemId) {
-                        R.id.show_all_menu -> {
+                        R.id.show_saved_asteroids -> {
+                            viewModel.filterAsteroidListBySaved()
                             true
                         }
 
-                        R.id.show_rent_menu -> {
+                        R.id.show_today_asteroids -> {
+                            viewModel.filterAsteroidListByToday()
                             true
                         }
 
-                        R.id.show_buy_menu -> {
+                        R.id.show_week_asteroids -> {
+                            viewModel.filterAsteroidListByWeek()
                             true
                         }
 
