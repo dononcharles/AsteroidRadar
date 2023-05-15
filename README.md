@@ -10,7 +10,8 @@ The app is consists of two screens: A Main screen with a list of all the detecte
 
 This kind of app is one of the most usual in the real world, what you will learn by doing this are some of the most fundamental skills you need to know to work as a professional Android developer, as fetching data from the internet, saving data to a database, and display the data in a clear, clear, compelling UI.
 
-### USE YOUR OWN NASA API KEY
+## USE YOUR OWN NASA API KEY
+
 Inside of the `gradle.properties` file, you will find a variable called `NASA_API_KEY`. 
 You need to replace the value of this variable with your own NASA API key. 
 You can get one for free here: https://api.nasa.gov/
