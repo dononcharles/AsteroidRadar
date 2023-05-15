@@ -3,7 +3,7 @@
     <string name="app_name">Asteroid Radar</string>
 
     <string name="next_week_asteroids">Afficher les astéroïdes de la semaine</string>
-    <string name="today_asteroids">Afficher les astéroïdes d\'aujourd'hui</string>
+    <string name="today_asteroids">Afficher les astéroïdes d\'aujourd\'hui</string>
     <string name="saved_asteroids">Afficher les astéroïdes enregistrés</string>
     <string name="close_approach_data_title">Date d\'approche de clôture</string>
     <string name="absolute_magnitude_title">Magnitude absolue</string>
