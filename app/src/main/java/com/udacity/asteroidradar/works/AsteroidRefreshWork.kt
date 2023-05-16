@@ -30,8 +30,8 @@ class AsteroidRefreshWork(private val appContext: Context, params: WorkerParamet
 
         return try {
             withContext(dispatcher) {
-                repo.requestTodayAsteroids()
-                makeStatusNotification("New Asteroids is available for today.", appContext)
+                repo.requestForNext7DaysAsteroids()
+                makeStatusNotification("Download of the next 7 days asteroids.", appContext)
             }
             delay(WORK_SLEEP_DURATION)
             withContext(dispatcher) {
