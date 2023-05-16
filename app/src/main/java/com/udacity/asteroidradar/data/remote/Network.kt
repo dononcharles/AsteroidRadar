@@ -34,6 +34,14 @@ private fun provideOkHttpClient() = OkHttpClient.Builder()
         if (BuildConfig.DEBUG) {
             addInterceptor(HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY })
         }
+        addInterceptor {
+            val url = it.request()
+                .url
+                .newBuilder()
+                .addQueryParameter("api_key", BuildConfig.NASA_API_KEY)
+                .build()
+            it.proceed(it.request().newBuilder().url(url).build())
+        }
     }
 
 /**
