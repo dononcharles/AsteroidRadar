@@ -1,7 +1,6 @@
 package com.udacity.asteroidradar.ui.main
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.udacity.asteroidradar.data.domains.AsteroidApiStatus
@@ -92,7 +91,7 @@ class MainViewModel(application: Application) : ViewModel() {
             delay(1000)
             try {
                 val dates = getNextSevenDaysFormattedDates()
-                asteroidRepo.getWeekAsteroids(dates.first(), dates.last()).distinctUntilChanged().collectLatest {
+                asteroidRepo.getWeekAsteroids(dates[1], dates.last()).distinctUntilChanged().collectLatest {
                     _asteroidList.value = it
                     _loadingAsteroidState.value = AsteroidApiStatus.DONE
                 }

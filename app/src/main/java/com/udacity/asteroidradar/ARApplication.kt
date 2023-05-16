@@ -40,7 +40,7 @@ class ARApplication : Application() {
 
     private fun setupRecurringWork() {
         val constraints = Constraints.Builder()
-            .setRequiredNetworkType(NetworkType.UNMETERED)
+            .setRequiredNetworkType(NetworkType.CONNECTED)
             .setRequiresBatteryNotLow(true)
             .setRequiresCharging(true)
             .apply {
